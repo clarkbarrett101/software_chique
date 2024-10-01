@@ -6,8 +6,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+@font-face {
+  font-family: 'swashr';
+  src: local('swashr'), url(./fonts/swashr.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'bookman';
+  src: local('bookman'), url(./fonts/bookman.ttf) format('truetype');
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
