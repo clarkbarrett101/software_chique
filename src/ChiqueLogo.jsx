@@ -94,9 +94,13 @@ export default function ChiqueLogo({ width }) {
   return (
     <div
       style={{
-        position: "absolute",
+        alignSelf: "center",
         left: window.innerWidth / 2 - width / 2,
         top: 0,
+        height: width * 1.5,
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <canvas ref={canvas} />
@@ -104,7 +108,6 @@ export default function ChiqueLogo({ width }) {
         src={slogan.src}
         alt="slogan"
         style={{
-          position: "absolute",
           top: width,
           left: 0,
           width: width,

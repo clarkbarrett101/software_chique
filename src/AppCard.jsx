@@ -9,35 +9,20 @@ export default function AppCard({
 }) {
   const [slideOffset, setSlideOffset] = useState(10);
   const [imagePos, setImagePos] = useState(0);
-  const width = window.innerWidth / 4;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSlideOffset((slideOffset) => {
-        if (slideOffset >= width) {
-          setImagePos((imagePos) => imagePos + 0.5);
-          return 0;
-        } else {
-          return slideOffset + 1;
-        }
-      });
-    }, 10);
-    return () => clearInterval(interval);
-  }, []);
+  const [imgOrder, setImgOrder] = useState(images);
+  const height = window.innerHeight * 0.7;
   function slideshow() {
     let imgs = [];
 
     for (let i = 0; i < images.length; i++) {
+      let index = (imagePos + i) % images.length;
       imgs.push(
         <img
-          src={images[i]}
+          src={images[index]}
           style={{
-            width: width,
-            height: width * 2.2,
             objectFit: "cover",
-            position: "absolute",
-            transform: `translateX(${
-              slideOffset + ((i + imagePos) % images.length) * width - width
-            }px)`,
+            margin: "10px",
+            height: height * 0.6,
           }}
           alt="image"
           className="AppImage"
@@ -47,12 +32,24 @@ export default function AppCard({
     return imgs;
   }
   return (
-    <div className="AppCard">
+    <div
+      className="AppCard"
+      style={{
+        padding: "10px",
+        flex: 1,
+        height: height,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          width: "50%",
+          alignSelf: "center",
         }}
       >
         <img
@@ -74,7 +71,7 @@ export default function AppCard({
         >
           <h3
             style={{
-              fontSize: "20px",
+              fontSize: "22px",
               color: "black",
               margin: "0px",
               fontFamily: "bookman",
@@ -84,12 +81,13 @@ export default function AppCard({
           </h3>
           <p
             style={{
-              fontSize: "12px",
+              fontSize: "18px",
               color: "black",
               margin: "0px",
               fontFamily: "bookman",
               textAlign: "center",
               textJustify: "inter-word",
+              padding: "10px",
             }}
           >
             {description}
@@ -122,7 +120,19 @@ export default function AppCard({
           ) : null}
         </div>
       </div>
-      {slideshow()}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          position: "relative",
+          width: "100%",
+          overflow: "hidden",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {slideshow()}
+      </div>
     </div>
   );
 }
